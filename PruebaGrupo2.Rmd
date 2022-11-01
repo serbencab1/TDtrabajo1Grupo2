@@ -6,4 +6,4 @@ output: html_document
 ---
 
 Esto es un Rmarkdown de prueba 
-
+Escribimos algo
