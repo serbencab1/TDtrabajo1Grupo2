@@ -6,5 +6,10 @@ output: html_document
 ---
 
 Esto es un Rmarkdown de prueba 
+<<<<<<< HEAD
 Escribimos algo...........
 DGHJDHJDGHJ
+=======
+
+Actualización de prueba
+>>>>>>> 885b88778d5b11cf14b436e3c1eec5cccac1478d
