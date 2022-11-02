@@ -1,0 +1,84 @@
+---
+title: "Problemas Individuales"
+author: "Grupo2"
+date: "2022-11-02"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(knitr)
+library(kableExtra)
+
+source("teoriadecision_funciones_incertidumbre.R")
+```
+
+
+# Enunciado Sergio Benítez Cabezas
+
+Pepe es un jugador de fútbol profesional, el cual actualmente se encuentra sin representante y está en busca de un nuevo proyecto deportivo que le motive para continuar en este deporte. Maneja una serie de opciones con respecto a su futuro y son las siguientes: 
+
+  - Si decide trabajar con un representante, este le ofrece un 80% de la próxima prima de fichaje (ya que el 20% se lo quedaría el representante), siendo esta de unos 500000 euros. Si cumple una serie de objetivos deportivos marcados en el contrato, tendrá un plus de 200000 euros, de los cuales el representante se queda un 10%. En el caso de que no cumpla esos objetivos, solo cobrará 10000 euros más, por fidelidad al club y terminar el año de contrato (aquí el representante no se llevaría ninguna comisión).
+  
+  - Si decide que el hermano, con un poco de menos experiencia, sea el que lo represente, las condiciones marcadas serán las siguientes: se quedará con un 10% tanto de la prima de fichaje como del plus que le dan si cumple los objetivos del contrato, que en el caso del hermano, el plus por objetivos se cerraría en unos 150000 euros. Y al igual que el representante anterior, sino cumple los objetivos Pepe se llevará los 10000 euros integros.
+  
+  - Por último, la última opción que maneja, es la de no tener representante. En la cual se llevaría sus 500000 de la prima por el fichaje. Pero al no tener experiencia en la negociación, sus primas por cumplir los objetivos bajarían a 75000 euros y sino los cumple no cobraría nada más alla del contrato firmado.
+  
+¿Cuál sería la mejor decisión que podría tomar Pepe?
+   
+### Solución
+
+-   Planteamiento:
+
+    -   Un decisor
+
+    -   Modelo de beneficios (favorable)
+
+    -   Alternativas:
+
+        -   d1= "Representante profesional"
+        -   d2= "Hermano Representante "
+        -   d3= "Sin representante"
+
+    -   Estados de la naturaleza:
+
+        -   e1= "Cumple los objetivos deportivos"
+        -   e2= "No cumple los objetivos deportivos"
+
+    -   Valoraciones (costos de los dos)
+
+        -   Estado e1:
+
+            -   $m_{1,1}=$ `r (0.8*500000)+(0.9*100000)`
+            -   $m_{2,1}=$ `r (0.9*500000)+(0.9*100000)`
+            -   $m_{3,1}=$ `r 500000+65000`
+
+        -   Estado e2:
+
+            -   $m_{1,2}=$ `r (0.8*500000)+10000`
+            -   $m_{2,2}=$ `r (0.9*500000)+10000`
+            -   $m_{3,2}=$ `r 500000`
+
+-   Introducción de datos:
+
+```{r}
+#e1:
+m11=(0.8*500000)+(0.9*200000)
+m21=(0.9*500000)+(0.9*150000)
+m31=500000+75000
+#e2:
+m12=(0.8*500000)+10000
+m22=(0.9*500000)+10000
+m32=500000
+```
+
+-   La solución sería:
+
+```{r}
+tbSergio = crea.tablaX(c(m11,m12,
+                         m21,m22,
+                         m31,m32),3,2)
+resSergio = criterio.Todos(tbSergio,0.5,T)
+knitr::kable(resSergio)
+```
+Salvo por el criterio optimista que la mejor opción es la decisión “d2 = Lo representa el hermano”, la mejor decisión es la “d1 = trabaja con un representante profesional y con experiencia”. Mientras que la otra decisión planteada "d3 = no tiene representante" no es seleccionada por ninguno de los criterios. En definitiva, Pepe se decantará por un representate profesional.
