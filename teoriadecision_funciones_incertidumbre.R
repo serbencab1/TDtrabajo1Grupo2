@@ -564,7 +564,19 @@ criterio.Todos = function(tablaX,alfa=0.3,favorable=TRUE) {
              paste0(names(cri06$AlternativaOptima),collapse = ","));
   resultado[nrow(resultado),] = decopt
   ## fin nuevo
-
+  
+  ##Mejora curso 22-23: Añadir columna con el numero de veces que cada alternativa ha resultado
+  ##ser óptima
+  
+  alt_optimas <- decopt[-(1:2)]
+  alts <- row.names(tablaX)
+  
+  veces <- numeric()
+  for (i in 1:length(alts)) {
+    veces[i] <- sum(stringr::str_detect(alt_optimas, pattern = alts[i]))  
+  }
+  resultado[,ncol(resultado)+1] <- c(veces, "")
+  colnames(resultado)[ncol(resultado)] <- "Veces Óptima"
   return(resultado)
 
 }
