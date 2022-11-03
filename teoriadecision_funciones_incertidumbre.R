@@ -577,7 +577,11 @@ criterio.Todos = function(tablaX,alfa=0.3,favorable=TRUE) {
   }
   resultado[,ncol(resultado)+1] <- c(veces, "")
   colnames(resultado)[ncol(resultado)] <- "Veces Óptima"
-  return(resultado)
+  #Ponemos un nuevo aspecto con una visualización más
+  return(kbl(resultado) %>%
+           kable_styling(
+             bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+             full_width = F))
 
 }
 
