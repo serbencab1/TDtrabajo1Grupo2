@@ -79,7 +79,7 @@ tbSergio = crea.tablaX(c(m11,m12,
                          m21,m22,
                          m31,m32),3,2)
 resSergio = criterio.Todos(tbSergio,0.5,T)
-knitr::kable(resSergio)
+resSergio
 ```
 Salvo por el criterio optimista que la mejor opción es la decisión “d2 = Lo representa el hermano”, la mejor decisión es la “d1 = trabaja con un representante profesional y con experiencia”. Mientras que la otra decisión planteada "d3 = no tiene representante" no es seleccionada por ninguno de los criterios. En definitiva, Pepe se decantará por un representate profesional.
 
