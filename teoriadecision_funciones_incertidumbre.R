@@ -61,6 +61,16 @@ criterio.tablaX.ejemplos = function(cual=1) {
 ## Funciones Métodos de Decisión bajo Incertidumbre ----
 
 ## Criterio de Wald o Pesimista
+
+# Explicación
+
+# Este es el criterio  está basado en lograr lo mejor de las peores condiciones
+# posibles. Para una matriz de ganancias la regla tomará el nombre MINIMAX dado que supondrá que la
+# elección de la alternativa será la mejor considerando previamente que ocurrirá el peor evento; o
+# MAXIMIN si se trata de una matriz de pérdidas, en la cual la elección del curso de acción implicará que
+# acontecida la peor situación se seleccionará el mejor resultado de las posibilidades alternas.
+
+
 criterio.Wald = function(tablaX,favorable=TRUE) {
 
   X = tablaX;
@@ -126,6 +136,14 @@ criterio.Optimista = function(tablaX,favorable=TRUE) {
 
 
 ## factor de optimismo   (alfab * "lo mejor" Altmax en favor. y Altmin en desf.)
+
+#EXPLICACION
+# #Este criterio representa un intervalo de actitudes desde la más optimista hasta la más pesimista. En las
+# condiciones más optimistas se elegiría la acción que proporcione el máx EI máx ej { x (ei, aj) },
+# suponiendo que se trata de beneficios o de ganancias.
+#Un valor de a entre cero y uno puede ser seleccionado
+#dependiendo de si el decisor tiende hacia el pesimismo o al optimismo. 
+
 criterio.Hurwicz = function(tablaX,alfa=0.3,favorable=TRUE) {
   # alfa es un escalar entre 0 y 1 lo obtiene para ese único valor
   X = tablaX;
@@ -406,6 +424,23 @@ dibuja.criterio.Hurwicz_Intervalos = function(tablaX,favorable=TRUE,mostrarGrafi
 
 
 ## Savage
+#Explicacaion:
+
+# En este caso Savage parte de los valores xij para hacer la elección,
+#el decisor compara el resultado de una alternativa bajo un estado de la naturaleza con todos los demás resultados,
+# independientemente del estado de la naturaleza bajo el que ocurran. Sin embargo, el estado de la
+# naturaleza no es controlable por el decisor, por lo que el resultado de una alternativa sólo debería ser
+# comparado con los resultados de las demás alternativas bajo el mismo estado de la naturaleza. Con este
+# propósito Savage define el concepto de pérdida relativa o pérdida de oportunidad rij asociada a un
+# resultado xij como la diferencia entre el resultado de la mejor alternativa dado que ej es el verdadero
+# estado de la naturaleza y el resultado de la alternativa ai bajo el estado ej.
+# Como paso previo a la aplicación de este criterio, se debe calcular la matriz de pérdidas relativas,
+# formada por los elementos rij. Cada columna de esta matriz se obtiene calculando la diferencia entre el
+# valor máximo de esa columna y cada uno de los valores que aparecen en ella. En el caso de ganancias esta
+# matriz de costo de oportunidades también se denomina matriz de las lamentaciones por contener los
+# valores que se han perdido de ganar por elegir otra alternativa
+
+
 
 criterio.Savage = function(tablaX,favorable=TRUE) {
 
@@ -447,7 +482,20 @@ criterio.Savage = function(tablaX,favorable=TRUE) {
 
 }
 
+###Explicacion criterio Laplace###
 
+# ## Este criterio, propuesto por Laplace, está basado en el principio de razón insuficiente: como a
+# priori no existe ninguna razón para suponer que un estado se puede presentar antes que los demás,
+# podemos considerar que todos los estados tienen la misma probabilidad de ocurrencia, es decir, la
+# ausencia de conocimiento sobre el estado de la naturaleza equivale a afirmar que todos los estados son
+# equiprobables. Así, para un problema de decisión con n posibles estados de la naturaleza, asignaríamos
+# probabilidad 1/n a cada uno de ellos. La regla de Laplace selecciona como alternativa óptima aquella que
+# proporciona un mayor resultado esperado.
+
+# La objeción que se suele hacer al criterio de Laplace es que ante una misma realidad, pueden tenerse
+# distintas probabilidades, según los casos que se consideren. Desde un punto de vista práctico, la dificultad
+# de aplicación de este criterio reside en la necesidad de elaboración de una lista exhaustiva y mutuamente
+# excluyente de todos los posibles estados de la naturaleza.
 
 criterio.Laplace = function(tablaX,favorable=TRUE) {
 
@@ -577,11 +625,7 @@ criterio.Todos = function(tablaX,alfa=0.3,favorable=TRUE) {
   }
   resultado[,ncol(resultado)+1] <- c(veces, "")
   colnames(resultado)[ncol(resultado)] <- "Veces Óptima"
-  #Ponemos un nuevo aspecto con una visualización más
-  return(kbl(resultado) %>%
-           kable_styling(
-             bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-             full_width = F))
+  return(resultado)
 
 }
 
