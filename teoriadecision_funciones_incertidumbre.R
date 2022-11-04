@@ -629,7 +629,11 @@ criterio.Todos = function(tablaX,alfa=0.3,favorable=TRUE) {
   #Ponemos un nuevo aspecto con mejor visualización
   return(kbl(resultado) %>%
          kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
-           full_width = F))
+           full_width = F)%>%
+           column_spec(ncol(resultado)+1,background = ifelse(resultado[,"Veces Óptima"] >=max(veces), 
+                                           "green", "red"))) #Con esta última orden lo que hacemos es 
+  #rellenar de verde la opción que ha resultado ser la más elegida entre todos los criterios
+           
 
 }
 
