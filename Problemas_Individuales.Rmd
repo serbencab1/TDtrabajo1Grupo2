@@ -163,3 +163,70 @@ A continuación, representamos el gráfico del criterio de Hurwicz:
 dibuja.criterio.Hurwicz(datos1, favorable=FALSE)
 ```
 
+# Enunciado Enrique Pérez Jiménez
+
+Manolo está buscando trabajo como vendedor de aspiradoras, y tiene ofertas de trabajo de tres empresas distintas. La primera le ofrece un sueldo fijo de 1500 euros al mes. La segunda le ofrece un sueldo base de 1000 euros al mes más una comisión de 10 euros por cada aspiradora que venda. La tercera empresa le ofrece un sueldo base de 1100 euros y la comisión es de 8 euros por cada aspiradora vendida. (Nota: Manolo tiene un máximo de 100 aspiradoras para vender cada mes). La primera empresa presenta el inconveniente de que sus almacenes se encuentran a una gran distancia de la casa de Manolo, por lo que, de trabajar en ella, debería hacer frente a un gasto de 250 euros al mes en concepto de transporte.
+
+### Solución
+
+- Planteamiento:
+
+  - Un decisior
+  
+  - Modelo de beneficios (favorable)
+  
+  - Alternativas: 
+  
+    - d1 = "Empresa 1"
+  
+    - d2 = "Empresa 2"
+  
+    - d3 = "Empresa 3"
+  
+  - Estados de la naturaleza:
+  
+    - e1 = "Vende todas las aspiradoras"
+  
+    - e2 = "No vende ninguna aspiradora"
+  
+  - Valoraciones:
+  
+    - Para el estado e1:
+  
+      - $m_{11} = $ `r -250 + 1500`
+  
+      - $m_{21} = $ `r 1000 + 10 * 100`
+  
+      - $m_{31} = $ `r 1100 + 8 * 100`
+  
+    - Para el estado e2:
+  
+      - $m_{12} =$ `r -250 + 1500`
+  
+      - $m_{22} = $ `r 1000`
+  
+      - $m_{32} = $ `r 1100`
+  - Introducimos los datos:
+  
+```{r}
+m11 <- -250 + 1500
+m21 <- 1000 + 10 * 100
+m31 <- 1100 + 8 * 100
+
+m12 <- -250 + 1500
+m22 <- 1000
+m32 <- 1100
+tabla_Enrique <- crea.tablaX(c(m11, m12, m21, m22, m31, m32), 3, 2)
+kable(tabla_Enrique)
+
+res_Enrique <- criterio.Todos(tabla_Enrique, 0.5, T)
+res_Enrique
+```
+
+Como resultado obtenemos que según el criterio de Wald, la mejor opción sería decantarse por la primera empresa, según el criterio optimista habría que aceptar la oferta de la segunda empresa, y según los criterios de Savage y Punto Ideal, lo mejor sería elegir la tercera empresa. Como resultado de aplicar los criterios de Hurwicz y Laplace obtenemos que lo mejor sería escoger la empresa 2 o la 3.
+
+También podríamos representar gráficamente el criterio de Hurwicz, lo que daría lugar a la siguiente gráfica:
+
+```{r}
+dibuja.criterio.Hurwicz(tabla_Enrique, favorable = T)
+```
