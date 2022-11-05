@@ -272,12 +272,22 @@ dibuja.criterio.Hurwicz(tabla_Enrique, favorable = T)
   m31=2000*0.05
 ```
   
+  Se realizan las siguientes cuentas debido a que el mercado sube.
+  Entonces, m11 será BTC multiplicado por el % que se tiene y multiplicado por la subida del mercado.
+  Sumando también el 60% de DOGE y el 40% de MATIC multiplicado por sus respectivas subidas.
+  Estos dos últimos valores son sobre 1000 ya que he se comienza con un capital del 50% inicial.
+  m21 y m31 es lo mismo pero variando los valores dependiendo de la alternativa que escogería Santiago.
+  
   e2
 ```{r}
   m12=-2000*0.5*0.05 - 1000*0.6*0.17 - 1000*0.4*0.04
   m22=-2000*0.5*0.05 - 1000*0.4*0.17 - 1000*0.6*0.04
   m32=-2000*0.05
 ```
+  
+  En este segundo estado se hará lo mismo que en el primero pero con todos los valores negativos.
+  Esto se debe a que el mercado ha bajado, por lo tanto todo esto serán pérdidas.
+  Las pérdidas están representadas en valores negativos.
   
   La solución sería:
 ```{r}
@@ -292,6 +302,11 @@ kable(tablaAlex)
 tablaAlex
 resAlex
 ```
+    
+    Aquí hemos creado la tabla con los valores de las distintas alternativas en los distintos estados de la naturaleza.
+    Luego he renombrado las columnas y las filas por su nombre para distinguirlas.
+    Tras esto insertamos los datos obtenidos en todos los criterios para comprobar qué alternativa es la óptima.
+    
     Analizando la tabla con todos los criterios tenemos que la mejor opción si Santi decide ser conservador es d3. La mejor opción en caso de ser optimista es d1 y para el resto de criterios, sería d2 la óptima.
     A continuación muestro el dibujo del criterio de Hurwicz.
 ```{r}
