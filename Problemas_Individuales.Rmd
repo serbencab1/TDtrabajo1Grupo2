@@ -276,6 +276,9 @@ dibuja.criterio.Hurwicz(tabla_Enrique, favorable = T)
 tablaAlex=crea.tablaX(c(172,-168,
                    158,-142,
                    100,-100),3,2)
+
+colnames(tablaAlex)=c("subida","bajada")
+rownames(tablaAlex)=c("60/40","40/60","100")
 resAlex=criterio.Todos(tablaAlex,0.5,T)
 kable(tablaAlex)
 tablaAlex
