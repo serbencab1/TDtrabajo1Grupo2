@@ -230,3 +230,60 @@ También podríamos representar gráficamente el criterio de Hurwicz, lo que dar
 ```{r}
 dibuja.criterio.Hurwicz(tabla_Enrique, favorable = T)
 ```
+
+# Enunciado Alejandro Gallego López
+
+  Santiago va a empezar a invertir en criptomonedas. Dispone de un capital de 2000€ los cuales va a diversificar entre monedas más volátiles y menos. Sabe que el 50% va a ir destinado seguro a BTC. El resto, va a dividirlo entre 2 monedas diferentes. La primera es DOGE, que es la más volátil y la segunda es MATIC, que es más volátil que BTC pero menos que DOGE. Santiago no sabe si invertir un 60% en DOGE y 40% en MATIC o un 40% DOGE, 60% MATIC. Por última opción, como la más conservadora, sería invertir el 100% en BTC. Si el mercado sube, BTC subirá un 5%, DOGE un 15% y MATIC un 8%. Si el mercado baja, BTC bajará un 5%, DOGE un 17% y MATIC un 4%.
+  
+### SOLUCIÓN
+
+  - Un único decisor
+  
+  - Modelo de beneficios (favorable)
+  
+  - Alternativas:
+    
+    - d1 = 50% BTC, 60% DOGE, 40% MATIC
+    
+    - d2 = 50% BTC, 40% DOGE, 60% MATIC
+    
+    - d3 = 100% BTC
+    
+  - Estados de la naturaleza:
+  
+    - e1 = El mercado sube un 5%, 15%, 8%
+    
+    - e2 = El mercado baja un 5%, 17%, 4%
+    
+  - Matriz de decisión:
+  
+  e1
+```{r}
+  m11=2000*0.5*0.05 + 1000*0.6*0.15 + 1000*0.4*0.08
+  m21=2000*0.5*0.05 + 1000*0.4*0.15 + 1000*0.6*0.08
+  m31=2000*0.05
+```
+  
+  e2
+```{r}
+  m12=-2000*0.5*0.05 - 1000*0.6*0.17 - 1000*0.4*0.04
+  m22=-2000*0.5*0.05 - 1000*0.4*0.17 - 1000*0.6*0.04
+  m32=-2000*0.05
+```
+  
+  La solución sería:
+```{r}
+tablaAlex=crea.tablaX(c(172,-168,
+                   158,-142,
+                   100,-100),3,2)
+resAlex=criterio.Todos(tablaAlex,0.5,T)
+kable(tablaAlex)
+tablaAlex
+resAlex
+```
+    Analizando la tabla con todos los criterios tenemos que la mejor opción si Santi decide ser conservador es d3. La mejor opción en caso de ser optimista es d1 y para el resto de criterios, sería d2 la óptima.
+    A continuación muestro el dibujo del criterio de Hurwicz.
+```{r}
+dibuja.criterio.Hurwicz(tablaAlex, favorable = T)
+```
+    
